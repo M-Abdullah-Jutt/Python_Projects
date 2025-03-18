@@ -1,43 +1,62 @@
 
-from datetime import datetime
+# Greetings Message
+print('Welcome! To Your Calculator')
 
-def calculate_age(birth_year, birth_month, birth_day):
-    # Get today's date and time
-    today = datetime.now()
+# Addition Function
+def add(x, y):
+    return x + y
 
-    # Calculate year difference
-    year_diff = today.year - birth_year
+# Subtraction Function
+def subtract(x, y):
+    return x - y
 
-    # Calculate month difference
-    month_diff = today.month - birth_month
+# Multiplication Function
+def multiply(x, y):
+    return x * y
 
-    # Calculate day difference
-    day_diff = today.day - birth_day
+# Division Function
+def divide(x, y):
+    if y == 0:
+        return "Error! Division by zero."
+    return x / y
 
-    # Adjust if the current day is before the birth day (in negative)
-    if day_diff < 0:
-        month_diff -= 1
-        # Add the number of days in the previous month to the day difference.
-        if today.month == 1:
-            prev_month_days = 31  # December has 31 days
-        else:
-            prev_month_days = (today.replace(month=today.month - 1, day=1) - today.replace(month=today.month - 1, day=1)).days
-        day_diff += prev_month_days
+# Modulus Function
+def modulus(x, y):
+    return x % y
 
-    # Adjust if the current month is before the birth month
-    if month_diff < 0:
-        year_diff -= 1
-        month_diff += 12
+# Basic Operators of a Calculator
+operators = ['addition', 'subtraction', 'multiply', 'division', 'modulus']
 
-    return year_diff, month_diff, day_diff
+# Calculation Function
+def calculation():
+    # Ask user to type numbers first.
+    first_number = float(input('Enter First Number: '))
+    second_number = float(input('Enter Second Number: '))
 
-# Input from user
-birth_year = int(input("Enter your year of birth: "))
-birth_month = int(input("Enter your month of birth: "))
-birth_day = int(input("Enter your day of birth: "))
+    # Ask user to perform operation.
+    operation = input('Write The Operation You Want To Perform: ').lower()
 
-# Calculate age
-years, months, days = calculate_age(birth_year, birth_month, birth_day)
+    # Conditional statements are used for building logic.
+    if operation in operators:
+        if operation == 'addition':
+            result = add(first_number, second_number)
+            print(f"Result: {round(result)}")
+        elif operation == 'subtraction':
+            result = subtract(first_number, second_number)
+            print(f"Result: {round(result)}")
+        elif operation == 'multiply':
+            result = multiply(first_number, second_number)
+            print(f"Result: {round(result)}")
+        elif operation == 'division':
+            result = divide(first_number, second_number)
+            print(f'Result: {result}')
+        elif operation == 'modulus':
+            result = modulus(first_number, second_number)
+            print(f"Result: {result}")
+    else:
+        # Display a user-friendly error message
+        print(f"Please perform an operation from the following list: {', '.join(operators)}")
 
-# Output the result
-print(f"Your age is {years} years, {months} months, and {days} days.")
+# Main Execution
+if __name__ == "__main__":
+    calculation()
